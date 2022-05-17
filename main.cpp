@@ -10,17 +10,24 @@ int main()
     Texture2D map = LoadTexture("Textures/nature_tileset/OpenWorldMap24x24.png");
 
     Texture2D playerIdle = LoadTexture("Textures/characters/knight_idle_spritesheet.png");
-    // Texture2D playerMove = LoadTexture("Textures/characters/knight_run_spritesheet.png");
+    Texture2D playerMove = LoadTexture("Textures/characters/knight_run_spritesheet.png");
     float playerSpriteScale{4};
     Vector2 playerPosition{
         (windowDimensions[0]/2) - (playerSpriteScale * playerIdle.width/6),
         (windowDimensions[1]/2) - (playerSpriteScale * playerIdle.height)
     };
-    
+    float playerSpeed{0.25};    
+    // 1= right, -1 = left. Used for flipping sprite
+    float rightleft{1.f};
 
+    //animation variables
+    float runningtime{};
+    int frame{};
+    const int maxFrame{6};
+    const float updateTime{1/12};
 
     Vector2 mapPosition{0.0, 0.0};
-    float playerSpeed{0.25};
+
     while (!WindowShouldClose())
     {
         BeginDrawing();
@@ -40,13 +47,16 @@ int main()
             mapPosition = Vector2Subtract(mapPosition, Vector2Scale(
                 Vector2Normalize(direction), //normalized direction so diagonal movement isnt faster than cardinal
                 playerSpeed)); //scale by player speed, to control rate of movement
+            
+            // if direction is less than zero, player must be moving right
+            direction.x < 0.f ? rightleft = -1.f : rightleft = 1.f;
         }
         
 
         //Draw the map
         DrawTextureEx(map, mapPosition, 0, 4, WHITE);
         //Draw the player
-        Rectangle source{0.f, 0.f, (float)(playerIdle.width/6), (float)playerIdle.height};
+        Rectangle source{0.f, 0.f, rightleft * (float)(playerIdle.width/6), (float)playerIdle.height};
         Rectangle dest{playerPosition.x, playerPosition.y, playerSpriteScale * playerIdle.width/6, playerSpriteScale* playerIdle.height};
         DrawTexturePro(playerIdle, source, dest, Vector2{}, 0, WHITE);
 

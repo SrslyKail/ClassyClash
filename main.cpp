@@ -22,7 +22,5 @@ int main()
     CloseWindow();
     UnloadTexture(map);
 
-    // comment to change the file
-
     return 1;
 }

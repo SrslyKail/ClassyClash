@@ -2,14 +2,10 @@
 #include "raymath.h"
 #include "Character.h"
 
-Character::Character()
+Character::Character(int screenWidth, int screenHeight)
 {
     width = currentTexture.width / maxFrame;
     height = currentTexture.height;
-}
-
-void Character::setScreenPosition(int screenWidth, int screenHeight)
-{
     screenPosition = {
         (screenWidth / 2) - (spriteScale * width / 2.f),
         (screenHeight / 2) - (spriteScale * height / 2.f)};
@@ -66,17 +62,17 @@ void Character::tick(float deltaTime) // things we want to do every frame
     }
     // Get the sprite from the current sprite sheet
     Rectangle source{
-        (frame * currentTexture.width) / (float)maxFrame,
+        (frame * currentTexture.width) / static_cast<float>(maxFrame),
         0.f,
         rightLeft * width,
-        (float)height};
+        static_cast<float>(height)};
 
     // where to put the sprite on the screen
     Rectangle dest{
         screenPosition.x,
         screenPosition.y,
-        spriteScale * currentTexture.width / (float)maxFrame,
-        spriteScale * (float)height};
+        spriteScale * currentTexture.width / static_cast<float>(maxFrame),
+        spriteScale * static_cast<float>(height)};
 
     // Draw the player
     DrawTexturePro(currentTexture, source, dest, Vector2{}, 0.f, WHITE);

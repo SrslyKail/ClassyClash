@@ -4,17 +4,15 @@
 
 int main()
 {
-    float windowWidth{384};
-    float windowHeight{384};
+    const int windowWidth{384};
+    const int windowHeight{384};
     InitWindow(windowWidth, windowHeight, "Top-down Game");
 
     Texture2D map = LoadTexture("Textures/nature_tileset/OpenWorldMap24x24.png");
     Vector2 mapPosition{0.0, 0.0};
     const int mapScale{4};
 
-    Character player;
-
-    player.setScreenPosition(windowWidth, windowHeight);
+    Character player{windowWidth, windowHeight};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())

@@ -3,13 +3,12 @@
 class Prop
 {
 public:
-    Prop(Texture2D tex, Vector2 pos, float propScale);
+    Prop(Vector2 pos, Texture2D tex);
     void Render(Vector2 playerPosition);
     Rectangle getCollionRectangle(Vector2 playerPosition);
 
 private:
-    Vector2 screenPosition{};
-    Texture2D texture{};
     Vector2 worldPosition{};
-    float propScale{};
+    Texture2D texture{};
+    float propScale{4};
 };

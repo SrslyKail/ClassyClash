@@ -2,8 +2,9 @@
 #include "raymath.h"
 #include "Prop.h"
 
-Prop::Prop(Texture2D tex, Vector2 pos, float scale) : texture(tex),
-                                                      worldPosition(pos), propScale(scale)
+Prop::Prop(Vector2 pos, Texture2D tex) : worldPosition(pos), 
+                                         texture(tex)
+                                                      
 {
 }
 

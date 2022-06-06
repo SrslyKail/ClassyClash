@@ -16,8 +16,8 @@ int main()
     Character player{windowWidth, windowHeight};
 
     Prop prop_array[2]{
-        Prop{LoadTexture("Textures/nature_tileset/Rock.png"), Vector2{600, 300}, mapScale},
-        Prop{LoadTexture("Textures/nature_tileset/Log.png"), Vector2{400, 500}, mapScale}};
+        Prop{Vector2{600, 300}, LoadTexture("Textures/nature_tileset/Rock.png")},
+        Prop{Vector2{400, 500}, LoadTexture("Textures/nature_tileset/Log.png")}};
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -49,7 +49,7 @@ int main()
         // Check player and prop collision
         for (Prop i : prop_array)
         {
-            if (CheckCollisionRecs(i.getCollionRectangle(player.getWorldPosition()), player.getCollionRectangle()))
+            if (CheckCollisionRecs(player.getCollionRectangle(), i.getCollionRectangle(player.getWorldPosition())))
             {
                 player.undoMovement();
             }

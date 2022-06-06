@@ -77,3 +77,12 @@ void Character::tick(float deltaTime) // things we want to do every frame
     // Draw the player
     DrawTexturePro(currentTexture, source, dest, Vector2{}, 0.f, WHITE);
 }
+
+Rectangle Character::getCollionRectangle()
+{
+    return Rectangle{
+        screenPosition.x,
+        screenPosition.y,
+        currentTexture.width * spriteScale,
+        currentTexture.height * spriteScale};
+}

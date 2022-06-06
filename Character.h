@@ -8,6 +8,7 @@ public:
     void undoMovement() { worldPosition = lastFrameWorldPosition; }
     void tick(float deltaTime);
     Vector2 lastFrameWorldPosition{};
+    Rectangle getCollionRectangle();
 
 private:
     // textures

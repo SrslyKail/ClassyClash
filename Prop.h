@@ -3,7 +3,7 @@
 class Prop
 {
 public:
-    Prop(Texture2D tex, Vector2 pos);
+    Prop(Texture2D tex, Vector2 pos, float scale);
     void Render(Vector2 playerPosition);
 
 private:
@@ -11,4 +11,4 @@ private:
     Texture2D texture{};
     Vector2 worldPosition{};
     float scale{};
-}
+};

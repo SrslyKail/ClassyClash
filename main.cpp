@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "Character.h"
+#include "Prop.h"
 
 int main()
 {
@@ -14,6 +15,10 @@ int main()
 
     Character player{windowWidth, windowHeight};
 
+    Prop prop_array[2]{
+        Prop{LoadTexture("Textures/nature_tileset/Rock.png"), Vector2{600, 300}, mapScale},
+        Prop{LoadTexture("Textures/nature_tileset/Log.png"), Vector2{400, 500}, mapScale}
+    };
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -26,6 +31,13 @@ int main()
         // Draw the map
         DrawTextureEx(map, mapPosition, 0, mapScale, WHITE);
         player.tick(deltaTime);
+
+        // Draw the props
+        for(Prop i : prop_array)
+        {
+            i.Render(player.getWorldPosition());
+        }
+        
 
         // check map boundaries
         if (player.getWorldPosition().x < 0.f ||

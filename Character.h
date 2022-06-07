@@ -5,6 +5,6 @@ class Character : public BaseCharacter
 {
 public:
     Character(int screenWidth, int screenHeight);
-    void tick(float deltaTime);
+    virtual void tick(float deltaTime) override;
 private:
 };

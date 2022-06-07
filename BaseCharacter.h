@@ -5,11 +5,12 @@
 class BaseCharacter
 {
 public:
-    BaseCharacter(Texture2D idle_texture, Texture2D run_texture, Vector2 position);
+    BaseCharacter();
     Vector2 getWorldPosition() { return worldPosition; }
     void undoMovement() { worldPosition = lastFrameWorldPosition; }
     Vector2 lastFrameWorldPosition{};
     Rectangle getCollionRectangle();
+    virtual void tick(float deltaTime);
 protected:
     // textures
     Texture2D currentTexture{LoadTexture("Textures/characters/knight_idle_spritesheet.png")};

@@ -1,12 +1,13 @@
 #include "raylib.h"
+#include "BaseCharacter.h"
 
-class Character
+class Character : public BaseCharacter
 {
 public:
     Character(int screenWidth, int screenHeight);
     Vector2 getWorldPosition() { return worldPosition; }
-    void undoMovement() { worldPosition = lastFrameWorldPosition; }
     void tick(float deltaTime);
+    void undoMovement() { worldPosition = lastFrameWorldPosition; }
     Vector2 lastFrameWorldPosition{};
     Rectangle getCollionRectangle();
 

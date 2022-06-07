@@ -1,16 +1,17 @@
 #include "raylib.h"
+#include "BaseCharacter.h"
 
-
-class Enemy
+class Enemy : public BaseCharacter
 {
-    public:
+public:
     Enemy(Texture2D idle_texture, Texture2D run_texture, Vector2 position);
     Vector2 getWorldPosition() { return worldPosition; }
     void tick(float deltaTime);
     void undoMovement() { worldPosition = lastFrameWorldPosition; }
     Vector2 lastFrameWorldPosition{};
     Rectangle getCollionRectangle();
-    private:
+
+private:
     // textures
     Texture2D currentTexture{LoadTexture("Textures/characters/knight_idle_spritesheet.png")};
     Texture2D idleTexture{LoadTexture("Textures/characters/knight_idle_spritesheet.png")};

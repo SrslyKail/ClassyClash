@@ -2,6 +2,7 @@
 #include "raymath.h"
 #include "Character.h"
 #include "Prop.h"
+#include "Enemy.h"
 
 int main()
 {
@@ -18,6 +19,12 @@ int main()
     Prop prop_array[2]{
         Prop{Vector2{600, 300}, LoadTexture("Textures/nature_tileset/Rock.png"), 4},
         Prop{Vector2{400, 500}, LoadTexture("Textures/nature_tileset/Log.png"), 4}};
+
+    Enemy goblin{
+        LoadTexture("Textures/characters/goblin_idle_spritesheet.png"),
+        LoadTexture("Textures/characters/goblin_run_spritesheet.png"),
+        Vector2{0,0}
+    };
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -35,7 +42,7 @@ int main()
         {
             i.Render(player.getWorldPosition());
         }
-        
+
         //Draw the player
         player.tick(deltaTime);
 
@@ -59,6 +66,9 @@ int main()
                 player.undoMovement();
             }
         }
+
+        //Draw the enemies
+        goblin.tick(deltaTime);
 
         EndDrawing();
     }

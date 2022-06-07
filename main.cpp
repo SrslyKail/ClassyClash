@@ -16,8 +16,8 @@ int main()
     Character player{windowWidth, windowHeight};
 
     Prop prop_array[2]{
-        Prop{Vector2{600, 300}, LoadTexture("Textures/nature_tileset/Rock.png")},
-        Prop{Vector2{400, 500}, LoadTexture("Textures/nature_tileset/Log.png")}};
+        Prop{Vector2{600, 300}, LoadTexture("Textures/nature_tileset/Rock.png"), 4},
+        Prop{Vector2{400, 500}, LoadTexture("Textures/nature_tileset/Log.png"), 4}};
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -29,13 +29,15 @@ int main()
         mapPosition = Vector2Scale(player.getWorldPosition(), -1);
         // Draw the map
         DrawTextureEx(map, mapPosition, 0, mapScale, WHITE);
-        player.tick(deltaTime);
 
         // Draw the props
         for (Prop i : prop_array)
         {
             i.Render(player.getWorldPosition());
         }
+        
+        //Draw the player
+        player.tick(deltaTime);
 
         // check map boundaries
         if (player.getWorldPosition().x < 0.f ||
@@ -49,7 +51,10 @@ int main()
         // Check player and prop collision
         for (Prop i : prop_array)
         {
-            if (CheckCollisionRecs(player.getCollionRectangle(), i.getCollionRectangle(player.getWorldPosition())))
+            if (CheckCollisionRecs(
+                i.getCollionRectangle(player.getWorldPosition()), 
+                player.getCollionRectangle())
+            )
             {
                 player.undoMovement();
             }
@@ -60,5 +65,5 @@ int main()
 
     CloseWindow();
 
-    return 1;
+    return 0;
 }

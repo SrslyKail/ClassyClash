@@ -83,6 +83,6 @@ Rectangle Character::getCollionRectangle()
     return Rectangle{
         screenPosition.x,
         screenPosition.y,
-        currentTexture.width * spriteScale,
-        currentTexture.height * spriteScale};
+        width * spriteScale,
+        height * spriteScale};
 }

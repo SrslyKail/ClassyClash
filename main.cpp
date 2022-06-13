@@ -23,8 +23,7 @@ int main()
     Enemy goblin{
         LoadTexture("Textures/characters/goblin_idle_spritesheet.png"),
         LoadTexture("Textures/characters/goblin_run_spritesheet.png"),
-        Vector2{0,0}
-    };
+        Vector2{0, 0}};
     SetTargetFPS(60);
     while (!WindowShouldClose())
     {
@@ -43,7 +42,7 @@ int main()
             i.Render(player.getWorldPosition());
         }
 
-        //Draw the player
+        // Draw the player
         player.tick(deltaTime);
 
         // check map boundaries
@@ -59,15 +58,14 @@ int main()
         for (Prop i : prop_array)
         {
             if (CheckCollisionRecs(
-                i.getCollionRectangle(player.getWorldPosition()), 
-                player.getCollionRectangle())
-            )
+                    i.getCollionRectangle(player.getWorldPosition()),
+                    player.getCollionRectangle()))
             {
                 player.undoMovement();
             }
         }
 
-        //Draw the enemies
+        // Draw the enemies
         goblin.tick(deltaTime);
 
         EndDrawing();

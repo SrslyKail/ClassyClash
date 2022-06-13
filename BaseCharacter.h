@@ -1,5 +1,4 @@
-#ifndef BASE_CHARACTER_H
-#define BASE_CHARACTER_H
+#pragma once
 #include "raylib.h"
 
 class BaseCharacter
@@ -11,6 +10,7 @@ public:
     Vector2 lastFrameWorldPosition{};
     Rectangle getCollionRectangle();
     virtual void tick(float deltaTime);
+
 protected:
     // textures
     Texture2D currentTexture{LoadTexture("Textures/characters/knight_idle_spritesheet.png")};
@@ -31,8 +31,6 @@ protected:
 
     // gameplay variables
     float speed{5};
+
 private:
-
 };
-
-#endif

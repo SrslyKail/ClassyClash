@@ -5,8 +5,10 @@
 class Character : public BaseCharacter
 {
 public:
-    Character(int screenWidth, int screenHeight);
+    Character(int windowWidth, int windowHeight);
     virtual void tick(float deltaTime) override;
-
+    virtual Vector2 getScreenPosition() override;
+    int screenWidth{};
+    int screenHeight{};
 private:
 };

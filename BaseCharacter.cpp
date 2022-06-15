@@ -1,5 +1,6 @@
 #include "BaseCharacter.h"
 #include "raylib.h"
+#include "raymath.h"
 
 BaseCharacter::BaseCharacter()
 {
@@ -9,8 +10,8 @@ BaseCharacter::BaseCharacter()
 Rectangle BaseCharacter::getCollionRectangle()
 {
     return Rectangle{
-        screenPosition.x,
-        screenPosition.y,
+        getScreenPosition().x,
+        getScreenPosition().y,
         width * spriteScale,
         height * spriteScale};
 }
@@ -18,7 +19,22 @@ Rectangle BaseCharacter::getCollionRectangle()
 void BaseCharacter::tick(float deltaTime)
 {
     lastFrameWorldPosition = getWorldPosition();
+    if (Vector2Length(velocity) != 0.0)
+    {
+        worldPosition = Vector2Add(
+            worldPosition, Vector2Scale(
+                               Vector2Normalize(velocity), // normalized direction so diagonal movement isnt faster than cardinal
+                               speed));                    // scale by player speed, to control rate of movement
 
+        // if direction is less than zero, player must be moving right
+        velocity.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
+        currentTexture = runTexture;
+    }
+    else
+    {
+        currentTexture = idleTexture;
+    }
+    velocity = {};
     // update animation frame
     runningTime += deltaTime;
     // if more time has passed than the fps of the animation
@@ -47,8 +63,8 @@ void BaseCharacter::tick(float deltaTime)
 
     // where to put the sprite on the screen
     Rectangle dest{
-        screenPosition.x,
-        screenPosition.y,
+        getScreenPosition().x,
+        getScreenPosition().y,
         spriteScale * currentTexture.width / static_cast<float>(maxFrame),
         spriteScale * static_cast<float>(height)};
 

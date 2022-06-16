@@ -8,7 +8,9 @@ public:
     Character(int windowWidth, int windowHeight);
     virtual void tick(float deltaTime) override;
     virtual Vector2 getScreenPosition() override;
+private:
     int screenWidth{};
     int screenHeight{};
-private:
+    Texture2D weapon{LoadTexture("Textures/characters/weapon_sword.png")};
+    Rectangle weaponCollision{};
 };

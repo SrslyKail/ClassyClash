@@ -33,4 +33,44 @@ void Character::tick(float deltaTime) // things we want to do every frame
 
     BaseCharacter::tick(deltaTime);
 
+    Vector2 origin{};
+    Vector2 offset{};
+    float rotation{};
+    if(rightLeft > 0.f)
+    {
+        origin = {0.f, weapon.height * spriteScale};
+        offset = {35.f, 55.f};
+        weaponCollision = {
+            getScreenPosition().x + offset.x,
+            getScreenPosition().y + offset.y-(weapon.height * spriteScale),
+            weapon.width * spriteScale,
+            weapon.height * spriteScale
+        };
+        rotation = 35.f;
+    }
+    else
+    {
+        origin = {static_cast<float>(weapon.width)* spriteScale, weapon.height * spriteScale};
+        offset = {25.f, 55.f};
+        weaponCollision = {
+            getScreenPosition().x + offset.x - (weapon.width * spriteScale),
+            getScreenPosition().y + offset.y-(weapon.height * spriteScale),
+            weapon.width * spriteScale,
+            weapon.height * spriteScale
+        };
+        rotation = -35.f;
+    }
+
+    // Draw the sword
+    Rectangle source{0.f, 0.f, static_cast<float>(weapon.width) * rightLeft, static_cast<float>(weapon.height)};
+    Rectangle destination{getScreenPosition().x + offset.x, getScreenPosition().y + offset.y, weapon.width * spriteScale, weapon.height * spriteScale};
+    DrawTexturePro(weapon, source, destination, origin, rotation, WHITE);
+
+    DrawRectangleLines(
+        weaponCollision.x,
+        weaponCollision.y,
+        weaponCollision.width,
+        weaponCollision.height,
+        RED
+    );
 }

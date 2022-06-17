@@ -2,9 +2,8 @@
 #include "raymath.h"
 #include "Character.h"
 
-Character::Character(int windowWidth, int windowHeight) :
-    screenWidth(windowWidth),
-    screenHeight(windowHeight)
+Character::Character(int windowWidth, int windowHeight) : screenWidth(windowWidth),
+                                                          screenHeight(windowHeight)
 {
     width = currentTexture.width / maxFrame;
     height = currentTexture.height;
@@ -13,8 +12,8 @@ Character::Character(int windowWidth, int windowHeight) :
 Vector2 Character::getScreenPosition()
 {
     return Vector2{
-    (screenWidth / 2) - (spriteScale * width / 2.f),
-    (screenHeight / 2) - (spriteScale * height / 2.f)};
+        (screenWidth / 2) - (spriteScale * width / 2.f),
+        (screenHeight / 2) - (spriteScale * height / 2.f)};
 }
 
 void Character::tick(float deltaTime) // things we want to do every frame
@@ -36,29 +35,27 @@ void Character::tick(float deltaTime) // things we want to do every frame
     Vector2 origin{};
     Vector2 offset{};
     float rotation{};
-    if(rightLeft > 0.f)
+    if (rightLeft > 0.f)
     {
         origin = {0.f, weapon.height * spriteScale};
         offset = {35.f, 55.f};
         weaponCollision = {
             getScreenPosition().x + offset.x,
-            getScreenPosition().y + offset.y-(weapon.height * spriteScale),
+            getScreenPosition().y + offset.y - (weapon.height * spriteScale),
             weapon.width * spriteScale,
-            weapon.height * spriteScale
-        };
-        rotation = 35.f;
+            weapon.height * spriteScale};
+        IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? rotation = 35.f : rotation = 0.f;
     }
     else
     {
-        origin = {static_cast<float>(weapon.width)* spriteScale, weapon.height * spriteScale};
+        origin = {static_cast<float>(weapon.width) * spriteScale, weapon.height * spriteScale};
         offset = {25.f, 55.f};
         weaponCollision = {
             getScreenPosition().x + offset.x - (weapon.width * spriteScale),
-            getScreenPosition().y + offset.y-(weapon.height * spriteScale),
+            getScreenPosition().y + offset.y - (weapon.height * spriteScale),
             weapon.width * spriteScale,
-            weapon.height * spriteScale
-        };
-        rotation = -35.f;
+            weapon.height * spriteScale};
+        IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? rotation = -35.f : rotation = 0.f;
     }
 
     // Draw the sword
@@ -71,6 +68,5 @@ void Character::tick(float deltaTime) // things we want to do every frame
         weaponCollision.y,
         weaponCollision.width,
         weaponCollision.height,
-        RED
-    );
+        RED);
 }

@@ -11,6 +11,9 @@ public:
     Rectangle getCollionRectangle();
     virtual void tick(float deltaTime);
     virtual Vector2 getScreenPosition() = 0;
+    bool getAlive() { return alive; }
+    void setAlive(bool isAlive) { alive = isAlive; }
+
 protected:
     // textures
     Texture2D currentTexture{LoadTexture("Textures/characters/knight_idle_spritesheet.png")};
@@ -34,4 +37,5 @@ protected:
     float speed{5};
 
 private:
+    bool alive{true};
 };

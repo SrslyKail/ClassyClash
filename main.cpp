@@ -70,6 +70,22 @@ int main()
         // Draw the enemies
         goblin.tick(deltaTime);
 
+        // If the player swung the sword, check if a goblin got hit
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) == true)
+        {
+            if (CheckCollisionRecs(player.getWeaponCollision(), goblin.getCollionRectangle()) == true)
+            {
+                // Then kill the goblin
+                goblin.setAlive(false);
+            }
+        }
+
+        // If the goblin has touched the player
+        if (CheckCollisionRecs(player.getCollionRectangle(), goblin.getCollionRectangle()) == true)
+        {
+            // Kill the player
+            player.setAlive(false);
+        }
         EndDrawing();
     }
 

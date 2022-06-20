@@ -2,9 +2,6 @@
 #include "raymath.h"
 #include "Character.h"
 
-#include <iostream>
-using namespace std;
-
 Character::Character(int windowWidth, int windowHeight) : screenWidth(windowWidth),
                                                           screenHeight(windowHeight)
 {
@@ -21,6 +18,9 @@ Vector2 Character::getScreenPosition()
 
 void Character::tick(float deltaTime) // things we want to do every frame
 {
+    if (!getAlive())
+        return;
+
     lastFrameWorldPosition = getWorldPosition();
 
     // check for directional inputs and apply force
@@ -76,8 +76,6 @@ void Character::tick(float deltaTime) // things we want to do every frame
 void Character::takeDamage(float damage)
 {
     health -= damage;
-    cout << "Health: " << health << endl
-         << "Damage: " << damage << endl;
 
     if (health <= 0.f)
     {

@@ -24,9 +24,9 @@ void BaseCharacter::tick(float deltaTime)
         worldPosition = Vector2Add(
             worldPosition, Vector2Scale(
                                Vector2Normalize(velocity), // normalized direction so diagonal movement isnt faster than cardinal
-                               speed));                    // scale by player speed, to control rate of movement
+                               speed));                    // scale by character speed, to control rate of movement
 
-        // if direction is less than zero, player must be moving right
+        // if direction is less than zero, character must be moving right
         velocity.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
         currentTexture = runTexture;
     }
@@ -70,4 +70,12 @@ void BaseCharacter::tick(float deltaTime)
 
     // Draw the sprite
     DrawTexturePro(currentTexture, source, dest, Vector2{}, 0.f, WHITE);
+
+    // TODO: Remove This
+    DrawRectangleLines(
+        getCollisionRectangle().x,
+        getCollisionRectangle().y,
+        width * spriteScale,
+        height * spriteScale,
+        BLUE);
 }

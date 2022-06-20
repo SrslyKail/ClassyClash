@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "Prop.h"
 #include "Enemy.h"
+#include <string>
 
 int main()
 {
@@ -42,6 +43,19 @@ int main()
         for (Prop i : prop_array)
         {
             i.Render(player.getWorldPosition());
+        }
+
+        if (!player.getAlive()) // player is not alive
+        {
+            DrawText("Game Over!", 55.f, 45.f, 40, RED);
+            EndDrawing();
+            continue;
+        }
+        else // player is alive
+        {
+            std::string playerHealth = "Health: ";
+            playerHealth.append(std::to_string(player.getHealth()), 0, 5);
+            DrawText(playerHealth.c_str(), 55.f, 45.f, 40, WHITE);
         }
 
         // Draw the player

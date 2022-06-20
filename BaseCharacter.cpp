@@ -7,7 +7,7 @@ BaseCharacter::BaseCharacter()
     width = currentTexture.width / maxFrame;
     height = currentTexture.height;
 }
-Rectangle BaseCharacter::getCollionRectangle()
+Rectangle BaseCharacter::getCollisionRectangle()
 {
     return Rectangle{
         getScreenPosition().x,

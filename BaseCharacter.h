@@ -8,7 +8,7 @@ public:
     Vector2 getWorldPosition() { return worldPosition; }
     void undoMovement() { worldPosition = lastFrameWorldPosition; }
     Vector2 lastFrameWorldPosition{};
-    Rectangle getCollionRectangle();
+    Rectangle getCollisionRectangle();
     virtual void tick(float deltaTime);
     virtual Vector2 getScreenPosition() = 0;
     bool getAlive() { return alive; }

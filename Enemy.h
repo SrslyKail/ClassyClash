@@ -13,4 +13,5 @@ public:
 
 private:
     Character *target;
+    float damagePerSecond{50.f};
 };

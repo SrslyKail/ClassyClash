@@ -2,6 +2,9 @@
 #include "raymath.h"
 #include "Character.h"
 
+#include <iostream>
+using namespace std;
+
 Character::Character(int windowWidth, int windowHeight) : screenWidth(windowWidth),
                                                           screenHeight(windowHeight)
 {
@@ -69,4 +72,15 @@ void Character::tick(float deltaTime) // things we want to do every frame
         weaponCollision.width,
         weaponCollision.height,
         RED);
+}
+void Character::takeDamage(float damage)
+{
+    health -= damage;
+    cout << "Health: " << health << endl
+         << "Damage: " << damage << endl;
+
+    if (health <= 0.f)
+    {
+        setAlive(false);
+    }
 }
